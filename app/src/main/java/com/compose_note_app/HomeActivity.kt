@@ -5,10 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,10 +30,11 @@ class MainActivity : ComponentActivity() {
             ComposeNoteAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     SingleNote()
+                    //test()
                 }
             }
         }
@@ -42,33 +44,30 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SingleNote() {
     Card(
+        modifier = Modifier
+            .height(IntrinsicSize.Min)
+            .padding(16.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp
         ),
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.Yellow
-        ),
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(IntrinsicSize.Min)
-            .padding(16.dp)
+        )
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxHeight()
                 .padding(16.dp)
         ) {
             SimpleText(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp),
+                    .fillMaxWidth(),
                 str = "How to make your personal brand stand out online!"
             )
             SimpleText(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
+                    .padding(top = 10.dp),
                 str = "May 22, 2023",
                 color = Color.LightGray
             )
@@ -85,7 +84,19 @@ fun SimpleText(modifier: Modifier, str: String, color: Color = Color.Black) {
     )
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun test() {
+    Card(
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        shape = RoundedCornerShape(size = 16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Blue),
+        modifier = Modifier
+            .size(width = 200.dp, height = 200.dp)
+    ) {
+    }
+}
+
+@Preview(showBackground = true)
 @Composable
 fun SingleNotePreview() {
     ComposeNoteAppTheme {
